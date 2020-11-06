@@ -188,14 +188,13 @@
 
             <a-entity id="poly-card" rotation="0 0 0" position="3.873 1.5 -0.047">
                 <a-text id="poly-title" class="art-text" mixin="table-label" position="0 0 -3" color="white" width="2.5"
-                    rotation="0 -90 0"
-                    text="value: Meet Poly. She honors humanity's first connections to Spatial Content. Based on the 25,000 year old paleolithic limestone carving known as'The Venus of Willendorf', 
+                    rotation="0 -90 0" text="value: Meet Poly. She honors humanity's first connections to Spatial Content. Based on the 25,000 year old paleolithic limestone carving known as'The Venus of Willendorf', 
                     Poly wears a VR Headset with a WebXR Emblem for a Crown. She has no feet so she levitates over her pedestal, because she can.
                     Poly may be gone, but here she lives forever as a symbol of the 3D Medium.;wrap-count:30 ">
                     <a-entity position="3.75 0 0" rotation="0 0 0">
 
-                        <a-image mixin="scale-label" src="images/icons/venus-of-willendorf.png" position="1 0 0" width="2"
-                            height="2">
+                        <a-image mixin="scale-label" src="images/icons/venus-of-willendorf.png" position="1 0 0"
+                            width="2" height="2">
                         </a-image>
 
                     </a-entity>
@@ -204,7 +203,7 @@
             <!-- Image Panels -->
             </a-text>
         </a-entity>
-        </a-entity>
+   
 
 
 
@@ -254,9 +253,11 @@
 
                     <a-text position="3 0.3 0" color="cyan"
                         text="value:Single User Experience of the Year;align:center"></a-text>
-                    <a-text position="3 0.1 0" color="cyan" width="2.5" 
-                        text="value:Clinched Nominations;align:center"></a-text>
-                    <a-entity position="0 0 0" rotation="0 0 0">
+                    <a-text position="3 0.1 0" color="cyan" width="2.5" text="value:Clinched Nominations;align:center">
+                    </a-text>
+                    <a-entity link="href:https://mixedreality.mozilla.org/hello-webxr/" position=" 0 0 0"
+                        rotation="0 0 0">
+
                         <a-text text="value:Hello WebXR; wrapCount:30" width="5" color="white" position="2 -0.4 0">
                             <a-text position="0.03 -0.25 0" text="value:Mozilla Mixed Reality; wrapCount:60" width="5"
                                 color="white">
@@ -278,9 +279,11 @@
 
 
 
-        <a-entity class="center-zone" id="table-mue" position="0 0.2 0.02" rotation="0 90 0">
+
+        <!-- MULTI-USER EXPERIENCE table -->
+        <a-entity class="center-zone" id="table-mue" position="-3 0.2 0.02" rotation="0 90 0">
             <!-- This sets the relative state of the table -->
-            <a-entity class="table" static-body="shape: box;" scale="1 1 1" id="sue-pedestal" gltf-model="#pedestal"
+            <a-entity class="table" static-body="shape: box;" scale="1 1 1" id="mue-pedestal" gltf-model="#pedestal"
                 shadow="cast: false; receive: false"></a-entity>
             <a-entity rotation="0 270 0" position="-0.201 0.89 0">
                 <a-plane height="0.2" width="0.5" color="#7a7a7a"
@@ -301,17 +304,16 @@
 
 
 
-                    <a-text position="3 0.3 0" color="cyan"
-                        text="value:Multi-User Experience of the Year;align:center"></a-text>
-                    <a-text position="3 0.1 0" width="2.5" color="cyan"
-                        text="value:Clinched Nominations;align:center">
+                    <a-text position="3 0.3 0" color="cyan" text="value:Multi-User Experience of the Year;align:center">
+                    </a-text>
+                    <a-text position="3 0.1 0" color="cyan" width="2.5" text="value:Clinched Nominations;align:center">
                     </a-text>
                     <a-entity position="0 0 0" rotation="0 0 0">
-                        <a-text text="value:Hello WebXR; wrapCount:30" width="5" color="white" position="2 -0.4 0">
+                        <a-text text="value:Hubs; wrapCount:30" width="5" color="white" position="2 -0.4 0">
                             <a-text position="0.03 -0.25 0" text="value:Mozilla Mixed Reality; wrapCount:60" width="5"
                                 color="white">
                             </a-text>
-                            <a-image mixin="scale-label" src="images/nominees/HelloWebXR-1.jpg" scale="0.25 0.25 0.25"
+                            <a-image mixin="scale-label" src="images/nominees/Hubs-01-1.svg" scale="0.25 0.25 0.25"
                                 position="-0.3 -0.091 0" width="2" height="2"></a-image>
                         </a-text>
 
@@ -324,11 +326,6 @@
             <!-- Image Panels -->
             </a-text>
         </a-entity>
-
-
-
-
-
 
 
 

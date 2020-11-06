@@ -10,13 +10,19 @@ AFRAME.registerComponent('device-set', {
             document.querySelector('#GL-SP').setAttribute("visible", "true");
             document.querySelector('#SMH-SP').setAttribute("visible", "true");
             for (let each of tablestand) {
-                each.setAttribute('animation', { property: 'position.y', to: 0.3, dur: 5000 });
+                each.setAttribute('animation', {
+                    property: 'position.y',
+                    to: 0.3,
+                    dur: 5000
+                });
             }
             for (let each of standup) {
                 each.removeAttribute('dynamic-body');
                 each.removeAttribute('grabbable');
                 each.setAttribute('static-body');
-                each.setAttribute('rotation', { z: 90 });
+                each.setAttribute('rotation', {
+                    z: 90
+                });
                 each.dispatchEvent(new CustomEvent("standtrigger"));
             }
         } else if (AFRAME.utils.device.checkHeadsetConnected() === true) { // VR Mode
@@ -28,13 +34,20 @@ AFRAME.registerComponent('device-set', {
             document.querySelector('#SMH-PC').setAttribute("visible", "true");
             rig.setAttribute("movement-controls", "speed", 0.15);
             for (let each of tablestand) {
-                each.setAttribute('animation', { property: 'position.y', to: 0.3, dur: 5000, delay: 50 });
+                each.setAttribute('animation', {
+                    property: 'position.y',
+                    to: 0.3,
+                    dur: 5000,
+                    delay: 50
+                });
             }
             for (let each of standup) {
                 each.removeAttribute('dynamic-body');
                 each.removeAttribute('grabbable');
                 each.setAttribute('static-body');
-                each.setAttribute('rotation', { z: 90 });
+                each.setAttribute('rotation', {
+                    z: 90
+                });
                 each.dispatchEvent(new CustomEvent("standtrigger"));
             }
         }
@@ -74,14 +87,16 @@ AFRAME.registerComponent('loadsvg', {
             var texture = new THREE.Texture(canvas);
             texture.needsUpdate = true;
 
-            var material = new THREE.MeshBasicMaterial({map: texture});
+            var material = new THREE.MeshBasicMaterial({
+                map: texture
+            });
 
             let tmp = mesh.material
             mesh.material = material
             tmp.dispose()
         }
         img.src = "images/logo/XRIgnite-Emblem.svg";
-        
+
     }
 })
 
@@ -215,7 +230,7 @@ AFRAME.registerComponent("grab-panels", {
                 cent.setAttribute("visible", !cent.getAttribute("visible"));
             })
         }
-        
+
         /*
         grabpanel("centerbutt", "#centerpiece-tit"); 
         grabpanel("gorillabutt", "#stand1-tit");
@@ -228,7 +243,7 @@ AFRAME.registerComponent("grab-panels", {
         grabpanel("tarsierbutt", "#stand8-tit");
         grabpanel("burialbuttinfo", "#james-tit");
         */
-       
+
     }
 })
 
@@ -249,11 +264,10 @@ AFRAME.registerComponent("togg-cred", {
             creditslist[counter].setAttribute("visible", true);
         })
     }
-}
-)
+})
 window.addEventListener('load', (event) => {
-    
-console.log('page is fully loaded');
+
+    console.log('page is fully loaded');
 }, false);
 
 // VR Grab Lab Grabbing Function
@@ -264,15 +278,15 @@ AFRAME.registerComponent("item-grab", {
             console.log(grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel)
             document.getElementById(grabitem).addEventListener("grab-start", function (evt) {
                 if (document.getElementById(grabinfo).getAttribute('visible') == true) {
-                     console.log("infotrue", grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel)
+                    console.log("infotrue", grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel)
                     for (let each of sceneEl.querySelectorAll(grabtable)) { // Turn off everything
                         each.setAttribute("visible", false);
                     }
                     document.getElementById(grabproj).setAttribute("visible", false);
-                    
-                   // document.getElementById(grabholo).setAttribute("visible", false);
+
+                    // document.getElementById(grabholo).setAttribute("visible", false);
                 } else {
-                     console.log("info",grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel)
+                    console.log("info", grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel)
                     for (let each of sceneEl.querySelectorAll(grabtable)) {
                         each.setAttribute("visible", false);
                     }
@@ -290,12 +304,12 @@ AFRAME.registerComponent("item-grab", {
 
         grabtrig("poly-grab", "poly-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
 
-        grabtrig("sue-grab", "sue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-  
-  //      grabtrig("mue-grab", "mue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-        
-     
-         grabtrig("ltaa-grab", "ltaa-title", ".art-text", "holoartifact", "holoartproj", "images/glb/Vuzix-Blade.glb", undefined, "2 2 2", undefined);
+       grabtrig("sue-grab", "sue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+        grabtrig("mue-grab", "mue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+
+        grabtrig("ltaa-grab", "ltaa-title", ".art-text", "holoartifact", "holoartproj", "images/glb/Vuzix-Blade.glb", undefined, "2 2 2", undefined);
     }
 })
 
