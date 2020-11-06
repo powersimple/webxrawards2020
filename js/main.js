@@ -251,20 +251,28 @@ AFRAME.registerComponent("togg-cred", {
     }
 }
 )
+window.addEventListener('load', (event) => {
+    
+console.log('page is fully loaded');
+}, false);
 
 // VR Grab Lab Grabbing Function
 AFRAME.registerComponent("item-grab", {
     init: function () {
         sceneEl = document.querySelector('a-scene');
         var grabtrig = function (grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel, grabrotate = "0 0 0", grabscale = "5 5 5", grabposition = "0 1 0") {
+            console.log(grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel)
             document.getElementById(grabitem).addEventListener("grab-start", function (evt) {
                 if (document.getElementById(grabinfo).getAttribute('visible') == true) {
+                     console.log("infotrue", grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel)
                     for (let each of sceneEl.querySelectorAll(grabtable)) { // Turn off everything
                         each.setAttribute("visible", false);
                     }
                     document.getElementById(grabproj).setAttribute("visible", false);
-                    document.getElementById(grabholo).setAttribute("visible", false);
+                    
+                   // document.getElementById(grabholo).setAttribute("visible", false);
                 } else {
+                     console.log("info",grabitem, grabinfo, grabtable, grabholo, grabproj, grabmodel)
                     for (let each of sceneEl.querySelectorAll(grabtable)) {
                         each.setAttribute("visible", false);
                     }
@@ -280,37 +288,18 @@ AFRAME.registerComponent("item-grab", {
         }
 
 
-        grabtrig("vuzix-grab", "vuzix-tit", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2, undefined);
-    //    grabtrig("cleanbox-grab", "cleanbox-device", ".art-text", "holoartifact", "holoartproj", "#cleanbox-device", undefined, "6 6 6", undefined);
-        // Toggle Artifacts 1
-      //  grabtrig("acheul-grab", "acheul-tit", ".art-text", "holoartifact", "holoartproj", "anvropomotron/glb/acheul.glb", "0 0 90", "7 7 7", "0.18 1.3 0");
-        //grabtrig("mousterian-grab", "mousterian-tit", ".art-text", "holoartifact", "holoartproj", "anvropomotron/glb/mousterian.glb", "0 0 90", "9 9 9", "0 1.5 0");
-        //grabtrig("clovis-grab", "clovis-tit", ".art-text", "holoartifact", "holoartproj", "anvropomotron/glb/clovis.glb", "0 0 90", "12 12 12", "0 1.4 0");
-        //grabtrig("harpoon-grab", "harpoon-tit", ".art-text", "holoartifact", "holoartproj", "anvropomotron/glb/harpoon.glb", "0 0 90", "7 7 7", "0 1.4 0");
+        grabtrig("poly-grab", "poly-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+        grabtrig("sue-grab", "sue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+  
+  //      grabtrig("mue-grab", "mue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
         
-       // grabtrig("venus-grab", "venus-tit", ".art-text", "holoartifact", "holoartproj", "anvropomotron/glb/venus.glb", undefined, "8 8 8", "0 0.9 0");
-        //grabtrig("nasca-grab", "nasca-tit", ".art-text", "holoartifact", "holoartproj", "anvropomotron/glb/nasca.glb", undefined, "6 6 6", "0 0.9 0");
-        //grabtrig("canopic-grab", "canopic-tit", ".art-text", "holoartifact", "holoartproj", "anvropomotron/glb/canopic.glb", undefined, "6 6 6", "0 1 0");
-        //grabtrig("baboon-blue-grab", "baboon-blue-tit", ".art-text", "holoartifact", "holoartproj", "anvropomotron/glb/baboon-blue.glb", undefined, "7 7 7", "0 0.9 0");
+     
+         grabtrig("ltaa-grab", "ltaa-title", ".art-text", "holoartifact", "holoartproj", "images/glb/Vuzix-Blade.glb", undefined, "2 2 2", undefined);
     }
 })
 
-// Raise and Lower Burial
-/*
-AFRAME.registerComponent("burial-grab", {
-    init: function () {
-        var state = "down";
-        document.getElementById("burialbuttpos").addEventListener("grab-start", function (evt) {
-            if (state == "down") { // Toggle height
-                document.querySelector(".burialgrave").setAttribute('animation', { property: 'position.y', to: 1.3, dur: 3000 });
-                state = "up";
-            } else {
-                document.querySelector(".burialgrave").setAttribute('animation', { property: 'position.y', to: 0.8, dur: 3000 });
-                state = "down";
-            }
-        })
-    }
-})*/
+
 // Anti-Drop Protection
 AFRAME.registerComponent("anti-drop", {
     init: function () {

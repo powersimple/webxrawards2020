@@ -3,7 +3,7 @@
 
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-790334-4"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-64Y5HTMWJ5"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -12,7 +12,7 @@
         }
         gtag('js', new Date());
 
-        gtag('config', 'UA-790334-4');
+        gtag('config', 'G-64Y5HTMWJ5');
     </script>
 
 
@@ -37,8 +37,9 @@
     <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
     <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
     <script src="js/aframe-teleport-controls.js"></script>
+    <script src="js/aframe-troika-text.js"></script>
     <script src="js/main.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
 </head>
 
@@ -59,8 +60,8 @@
             <a-asset-item id="buttonupmodel" response-type="arraybuffer" src="models//button-up.glb"></a-asset-item>
             <img id="sky" src="images/skybox/redmilkway.jpg">
 
-
-            <a-asset-item id="emblem" response-type="arraybuffer" src="models//Poly.glb"></a-asset-item>
+            <a-asset-item id="vuzix-blade" response-type="arraybuffer" src="images/glb/Vuzix-Blade.glb"></a-asset-item>
+            <a-asset-item id="#poly" response-type="arraybuffer" src="models/Poly.glb"></a-asset-item>
 
 
 
@@ -90,7 +91,7 @@
                               grabEndButtons: trackpadup, triggerup, gripopen, gripup, thumbstickup, mouseup"
                 teleport-controls="cameraRig: #rig; teleportOrigin: #camera;  startEvents: teleportstart; endEvents: teleportend; hitCylinderColor: #e9974c; interval: 10; curveHitColor: #e9974c; curveNumberPoints: 48; curveShootingSpeed: 12"
                 buttons></a-mixin>
-            <a-mixin id="table-label" position="0 0 -1" rotation="0 -90 0" visible="false"
+            <a-mixin id="table-label" position="0 0 -1" rotation="0 0 0" visible="false"
                 text="width: 2; color: black; lineHeight: 60; wrap-count: 35"></a-mixin>
             <a-mixin id="burial-label" position="0 0 -1" text="width: 2; color: black; lineHeight: 60; wrap-count: 35">
             </a-mixin>
@@ -105,8 +106,9 @@
             </a-mixin>
         </a-assets>
         <a-sky src="#sky"></a-sky>
+        <!--  
         <a-entity position="0 -1 -5" rotation="0 0 -0.45" gltf-model="models//Ring.glb" id="nav" nav-mesh
-            visible="false"></a-entity> <!--   collisionEntities: #nav;  Nav Mesh -->
+            visible="false"></a-entity>  collisionEntities: #nav;  Nav Mesh -->
         <a-entity position="0 -1 -5" rotation="0 0 -0.45" gltf-model="models//Ring.glb"></a-entity> <!-- Building -->
 
         <a-entity id="rig" rotation-reader movement-controls="speed: 0.1; constrainToNavMesh: true" position="0 0.01 1">
@@ -169,50 +171,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        <!-- Behind wall -->
-        <a-entity visible="true" static-body position="0 2 6" rotation="0 180 0" width="40" height="4.5">
-
-
-        </a-entity>
-
-
-
-        <!-- Alliances -->
-        <a-entity visible="true" static-body position="-7.223 1.948 4.506" rotation="0 90 0" width="2.2" height="4">
-
-
-            <a-light type="point" color="blue" position="0 0 0.1"></a-light>
-
-            </a-image>
-
-
-        </a-entity>
-
-
-
-
-        <!-- Left display wall -->
-
-
-
-
-
-
-        <!-- Artifact table -->
-        <a-entity class="center-zone" id="table-poly" position="0 0.2 0" rotation="0 90 0">
+        <!-- POLY table -->
+        <a-entity class="center-zone" id="table-poly" position="-1 .2 0" rotation="0 90 0">
+            <a-light type="point" color="white" position="0 5 0"></a-light>
             <!-- This sets the relative state of the table -->
-            <a-entity class="table" static-body="shape: box;" scale="1 1 1" gltf-model="#pedestal"
+            <a-entity class="table" static-body="shape: box;" scale="1 1 1" id="poly-pedestal" gltf-model="#pedestal"
                 shadow="cast: false; receive: false"></a-entity>
             <a-entity rotation="0 270 0" position="-0.201 0.89 0">
                 <a-plane height="0.2" width="0.5" color="#7a7a7a"
@@ -220,23 +183,145 @@
             </a-entity>
 
             <a-entity id="poly-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2"
-                position="0 1.01 0" mixin="obj" rotation="0 180 0" scale="0.5 0.5 0.5" gltf-model="#emblem"></a-entity>
+                position="0 1.01 0" mixin="obj" rotation="0 180 0" scale="0.5 0.5 0.5" gltf-model="models/poly.glb">
+            </a-entity>
+
+            <a-entity id="poly-card" rotation="0 0 0" position="3.873 1.5 -0.047">
+                <a-text id="poly-title" class="art-text" mixin="table-label" position="0 0 -3" color="white" width="2.5"
+                    rotation="0 -90 0"
+                    text="value: Meet Poly. She honors humanity's first connections to Spatial Content. Based on the 25,000 year old paleolithic limestone carving known as'The Venus of Willendorf', 
+                    Poly wears a VR Headset with a WebXR Emblem for a Crown. She has no feet so she levitates over her pedestal, because she can.
+                    Poly may be gone, but here she lives forever as a symbol of the 3D Medium.;wrap-count:30 ">
+                    <a-entity position="3.75 0 0" rotation="0 0 0">
+
+                        <a-image mixin="scale-label" src="images/icons/venus-of-willendorf.png" position="1 0 0" width="2"
+                            height="2">
+                        </a-image>
+
+                    </a-entity>
+
+            </a-entity><!-- Photo Caption -->
+            <!-- Image Panels -->
+            </a-text>
+        </a-entity>
+        </a-entity>
 
 
 
-            <a-text id="vuzix-blade-tit" class="art-text" mixin="table-label" position="1.58 0 -1.05"
-                rotation="-45 -90 0" scale="0.5 0.5 0.5" text="value: The 2020 WebXR Awards" font="">
-                <a-entity position="3.75 0 0" rotation="0 180 0">
-                    <a-image mixin="scale-label" src="images/devices/emblem.jpg" position="0 0 0.01" width="2.6"
-                        height="3">
-                    </a-image>
 
-                    <a-entity
-                        link="href: https://www.vuzix.com/Products/AddToCart/157; title: Order Now from Vuzix.com;"
-                        position="1.25 -1.56 0.01"></a-entity>
 
-                </a-entity><!-- Photo Caption -->
-                <!-- Image Panels -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- SINGLE USER EXPERIENCE table -->
+        <a-entity class="center-zone" id="table-sue" position="-2 0.2 0.02" rotation="0 90 0">
+            <!-- This sets the relative state of the table -->
+            <a-entity class="table" static-body="shape: box;" scale="1 1 1" id="sue-pedestal" gltf-model="#pedestal"
+                shadow="cast: false; receive: false"></a-entity>
+            <a-entity rotation="0 270 0" position="-0.201 0.89 0">
+                <a-plane height="0.2" width="0.5" color="#7a7a7a"
+                    text="value:Single User Experience of the Year; color:#f5f5f5; align:center; wrapCount:18;"
+                    side="double">
+                </a-plane>
+            </a-entity>
+
+            <a-entity id="sue-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2"
+                position="0 1.01 0" mixin="obj" rotation="0 180 0" scale="0.5 0.5 0.5" gltf-model="models/poly.glb">
+            </a-entity>
+
+
+
+            <a-entity id="sue-card" rotation="0 0 0" position="3.873 1.5 -0.047">
+                <a-text id="sue-title" mixin="table-label" class="art-text" position="0 1.45 -3" color="yellow"
+                    width="5" rotation="0 -90 0" text="value:;align:center wrapCount:50 ">
+
+
+
+                    <a-text position="3 0.3 0" color="cyan"
+                        text="value:Single User Experience of the Year;align:center"></a-text>
+                    <a-text position="3 0.1 0" color="cyan" width="2.5" 
+                        text="value:Clinched Nominations;align:center"></a-text>
+                    <a-entity position="0 0 0" rotation="0 0 0">
+                        <a-text text="value:Hello WebXR; wrapCount:30" width="5" color="white" position="2 -0.4 0">
+                            <a-text position="0.03 -0.25 0" text="value:Mozilla Mixed Reality; wrapCount:60" width="5"
+                                color="white">
+                            </a-text>
+                            <a-image mixin="scale-label" src="images/nominees/HelloWebXR-1.jpg" scale="0.25 0.25 0.25"
+                                position="-0.3 -0.091 0" width="2" height="2"></a-image>
+                        </a-text>
+
+                </a-text>
+
+
+            </a-entity><!-- Photo Caption -->
+            </a-text>
+
+            <!-- Image Panels -->
+            </a-text>
+        </a-entity>
+
+
+
+
+        <a-entity class="center-zone" id="table-mue" position="0 0.2 0.02" rotation="0 90 0">
+            <!-- This sets the relative state of the table -->
+            <a-entity class="table" static-body="shape: box;" scale="1 1 1" id="sue-pedestal" gltf-model="#pedestal"
+                shadow="cast: false; receive: false"></a-entity>
+            <a-entity rotation="0 270 0" position="-0.201 0.89 0">
+                <a-plane height="0.2" width="0.5" color="#7a7a7a"
+                    text="value:Multi-User Experience of the Year; color:#f5f5f5; align:center; wrapCount:18;"
+                    side="double">
+                </a-plane>
+            </a-entity>
+
+            <a-entity id="mue-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2"
+                position="0 1.01 0" mixin="obj" rotation="0 180 0" scale="0.5 0.5 0.5" gltf-model="models/poly.glb">
+            </a-entity>
+
+
+
+            <a-entity id="mue-card" rotation="0 0 0" position="3.873 1.5 -0.047">
+                <a-text id="mue-title" mixin="table-label" class="art-text" position="0 1.45 -3" color="yellow"
+                    width="5" rotation="0 -90 0" text="value:;align:center wrapCount:50 ">
+
+
+
+                    <a-text position="3 0.3 0" color="cyan"
+                        text="value:Multi-User Experience of the Year;align:center"></a-text>
+                    <a-text position="3 0.1 0" width="2.5" color="cyan"
+                        text="value:Clinched Nominations;align:center">
+                    </a-text>
+                    <a-entity position="0 0 0" rotation="0 0 0">
+                        <a-text text="value:Hello WebXR; wrapCount:30" width="5" color="white" position="2 -0.4 0">
+                            <a-text position="0.03 -0.25 0" text="value:Mozilla Mixed Reality; wrapCount:60" width="5"
+                                color="white">
+                            </a-text>
+                            <a-image mixin="scale-label" src="images/nominees/HelloWebXR-1.jpg" scale="0.25 0.25 0.25"
+                                position="-0.3 -0.091 0" width="2" height="2"></a-image>
+                        </a-text>
+
+                </a-text>
+
+
+            </a-entity><!-- Photo Caption -->
+            </a-text>
+
+            <!-- Image Panels -->
             </a-text>
         </a-entity>
 
@@ -244,17 +329,120 @@
 
 
 
-        <a-entity id="artifactscreen" class="center-zone" position="2 2 -7.4">
-            <a-entity position="-2 -2 1.4">
-                <a-sphere color="yellow" height="0.15" radius="0.1"></a-sphere>
-                <a-light type="point" color="blue" position="0 1 0"></a-light>
-                <a-entity id="holoartproj" visible="false">
 
-                    <a-entity mixin="holoprojector"></a-entity>
-                    <a-entity id="holoartifact" scale="7 7 7" rotation="0 0 0" class="center-obj-zone" static-body
-                        position="0 1.25 0" gltf-model="models//Poly.glb"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- LIFETIME ACHEIVEMENT table -->
+        <a-entity class="center-zone" id="table-ltaa" position=" 1 .2 0.02" rotation="0 90 0">
+            <!-- This sets the relative state of the table -->
+            <a-entity class="table" static-body="shape: box;" scale="1 1 1" id="ltaa-pedestal" gltf-model="#pedestal"
+                shadow="cast: false; receive: false"></a-entity>
+            <a-entity rotation="0 270 0" position="-0.201 0.89 0">
+                <a-plane height="0.2" width="0.5" color="#7a7a7a"
+                    text="value:Lifetime Achievement; color:#f5f5f5; align:center; wrapCount:15;" side="double">
+                </a-plane>
+            </a-entity>
+
+            <a-entity id="ltaa-grab" class="clickable center-obj-zone" dynamic-body="shape: box; mass: 2"
+                position="0 1.01 0" mixin="obj" rotation="0 180 0" scale="0.5 0.5 0.5" gltf-model="models/poly.glb">
+            </a-entity>
+
+            <a-entity id="ltaa-card" rotation="0 0 0" position="3.873 1.5 -0.047">
+                <a-text id="ltaa-title" class="art-text" mixin="table-label" position="0 0 -3" color="white" width="2.5"
+                    rotation="0 -90 0"
+                    text="value: Ricardo Cabello is the creator of ThreeJS known by the handle Mr. Doob. Since 2010 he has maintained one of the most influential open source repos in history, which is foundational to WebXR.  ThreeJS has over 120 releases, over 35,000 commits and has been forked over 25,000 times. It abstracts WebGL to JavaScript democratizing 3D graphics for Web Programmers. The WebXR honors Ricardo's work with its first Lifetime Achievement Award.;wrapCount:30 ">
+                    <a-entity position="3.75 0 0" rotation="0 0 0">
+                        <a-image mixin="scale-label" src="images/nominees/ricardo-cabello.jpg" position="1 0 0"
+                            width="2" height="2">
+                        </a-image>
+
+                        <a-entity
+                            link="href: https://www.vuzix.com/Products/AddToCart/157; title: Order Now from Vuzix.com;"
+                            position="1.25 -1.56 0.01"></a-entity>
+
+                    </a-entity><!-- Photo Caption -->
+                    <!-- Image Panels -->
+                </a-text>
+            </a-entity>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </a-entity>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <a-entity id="webxremblem" class="center-zone" position="2 9 -7.4">
+            <a-entity position="-2 -2 1.4">
+                <!--    <a-sphere color="yellow" height="0.15" radius="0.1"></a-sphere>
+            <a-entity mixin="holoprojector"></a-entity>
+            -->
+                <a-light type="point" color="blue" position="0 1 0"></a-light>
+                <a-entity id="holoartproj" visible="true">
+
+
+                    <a-entity scale="7 7 7" rotation="0 0 0" class="center-obj-zone" static-body position="0 1.25 0"
+                        gltf-model="models/emblem.glb"
                         animation="property: object3D.rotation.y; to: 360; easing: linear; dur: 12000; loop: true;"
-                        visible="false"></a-entity>
+                        visible="true"></a-entity>
                 </a-entity>
             </a-entity>
 
@@ -262,41 +450,38 @@
 
 
         </a-entity>
-        </a-entity>
 
-
-
-        <a-entity mixin="credit-text" class="credits" id="credits" visible="TRUE" position="0 -5 -11"
-            text="value: Page 2">
+        <a-entity mixin="credit-text" class="credits" id="credits" visible="TRUE" position="0 -0.-11 -13" text="value: "
+            color=>
             <a-text position="0 0 0" value="Credits and Info" color="black" width="2"></a-text>
 
             <a-entity togg-cred mixin="button" class="clickable" position="0 0 0" id="credbutt"
                 gltf-model="#buttonmodel"></a-entity>
-            <a-entity mixin="credit-text" class="credits" id="credits-1" position="-0.7 2 -7.499" text="value:  
-Special thanks to Dr. Keith Chan - This site is drived from ANVROPOMOTRON; color: black; wrapCount: 0"></a-entity>
+            <a-entity mixin="credit-text" class="credits" id="credits-1" position="0 0 0" text="value:  
+Special thanks to Dr. Keith Chan - This site is drived from ANVROPOMOTRON; color: white; wrapCount: 10"></a-entity>
 
-            <a-entity mixin="credit-text" class="credits" id="credits-2" visible="false" position="-0.7 2 -7.499"
-                text="value: Page 2">About</a-entity>
+            <a-entity mixin="credit-text" class="credits" id="credits-2" visible="false" position="0 0 0"
+                text="value: Page 2; color: white; wrapCount: 10"></a-entity>
 
-            <a-entity mixin="credit-text" class="credits" id="credits-3" position="-0.7 2 -7.499" visible="false"
-                text="value: Page 3;">Nomination Critera</a-entity>
+            <a-entity mixin="credit-text" class="credits" id="credits-3" position="0 0 0" visible="false"
+                text="value: Page 3; color: white; wrapCount: 10"></a-entity>
 
-            <a-entity mixin="credit-text" class="credits" id="credits-4" position="-0.7 2 -7.499" visible="false"
+            <a-entity mixin="credit-text" class="credits" id="credits-4" position="0 0 0" visible="false"
                 text="value: Page 4;"></a-entity>
 
-            <a-entity mixin="credit-text" class="credits" id="credits-5" position="-0.7 2 -7.499" visible="false"
+            <a-entity mixin="credit-text" class="credits" id="credits-5" position="0 0 0" visible="false"
                 text="value: Page 5;"></a-entity>
 
-            <a-entity mixin="credit-text" class="credits" id="credits-6" visible="false" position="-0.7 2 -7.499"
+            <a-entity mixin="credit-text" class="credits" id="credits-6" visible="false" position="0 0 0"
                 text="value: Page 6; "></a-entity>
 
-            <a-entity mixin="credit-text" class="credits" id="credits-7" visible="false" position="-0.7 2 -7.499"
+            <a-entity mixin="credit-text" class="credits" id="credits-7" visible="false" position="0 0 0"
                 text="value: Page 7; "></a-entity>
 
-            <a-entity mixin="credit-text" class="credits" id="credits-8" visible="false" position="-0.7 2 -7.499"
+            <a-entity mixin="credit-text" class="credits" id="credits-8" visible="false" position="0 0 0"
                 text="value: Page 8"></a-entity>
 
-            <a-entity mixin="credit-text" class="credits" id="credits-8" visible="false" position="-0.7 2 -7.499"
+            <a-entity mixin="credit-text" class="credits" id="credits-8" visible="false" position="0 0 0"
                 text="value: PAGE 9"></a-entity>
         </a-entity>
 

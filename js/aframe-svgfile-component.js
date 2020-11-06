@@ -71183,7 +71183,7 @@ function memcpy (src, srcOffset, dst, dstOffset, length) {
  */
 MeshLine.prototype.advance = function(position) {
 
-	var positions = this.attributes.position.array;
+	//var positions = this.attributes.position.array;
 	var previous = this.attributes.previous.array;
 	var next = this.attributes.next.array;
 	var l = positions.length;
