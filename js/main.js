@@ -267,7 +267,7 @@ AFRAME.registerComponent("togg-cred", {
 })
 window.addEventListener('load', (event) => {
 
-    console.log('page is fully loaded');
+   // console.log('page is fully loaded');
 }, false);
 
 // VR Grab Lab Grabbing Function
@@ -301,15 +301,40 @@ AFRAME.registerComponent("item-grab", {
             })
         }
 
+        //The Poly Award
+      grabtrig("poly-grab", "poly-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
 
-        grabtrig("poly-grab", "poly-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
-
+        //Single User Experience
        grabtrig("sue-grab", "sue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
 
+       // Multi-user experience
         grabtrig("mue-grab", "mue-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
 
 
-        grabtrig("ltaa-grab", "ltaa-title", ".art-text", "holoartifact", "holoartproj", "images/glb/Vuzix-Blade.glb", undefined, "2 2 2", undefined);
+        //GAME OF THE YEAR
+         grabtrig("goty-grab", "goty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+        //Entertainment OF THE YEAR
+        grabtrig("eeoty-grab", "eeoty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+        //Education OF THE YEAR
+        grabtrig("edoty-grab", "edoty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+        //Developer OF THE YEAR
+       grabtrig("doty-grab", "doty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+        //Innovation of the year
+        grabtrig("ioty-grab", "ioty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+       
+        //Framework OF THE YEAR
+        grabtrig("foty-grab", "foty-title", ".art-text", "holoartifact", "holoartproj", "models/emblem.glb", undefined, "2 2 2", undefined)
+
+//Lifetime Achievements Award
+grabtrig("oa-grab", "oa-title", ".art-text", "holoartifact", "holoartproj", "images/glb/", undefined, "2 2 2", undefined);
+
+        //Lifetime Achievements Award
+        grabtrig("ltaa-grab", "ltaa-title", ".art-text", "holoartifact", "holoartproj", "images/glb/", undefined, "2 2 2", undefined);
     }
 })
 
@@ -328,7 +353,7 @@ AFRAME.registerComponent("anti-drop", {
             let absarea = Math.abs(area)
             if (poss.y <= 0.1 && absarea <= 5) {
                 console.log(each.object3D.position);
-                each.object3D.position.set(0, 1.4, 0);
+             //   each.object3D.position.set(0, 1.4, 0);
                 each.components['dynamic-body'].syncToPhysics(); // This makes the position official
             }
         }
