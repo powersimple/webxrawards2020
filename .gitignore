@@ -2,5 +2,3 @@ node_modules
 .sass-cache
 .history
 .vscode-upload.js
-models
-images
